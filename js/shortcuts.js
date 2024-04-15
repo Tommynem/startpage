@@ -43,5 +43,4 @@ export default [
       Youtube: "youtube.com",
     },
   },
-
 ];
