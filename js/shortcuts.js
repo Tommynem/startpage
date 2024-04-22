@@ -4,6 +4,7 @@ export default [
     color: "cyan",
     items: {
       Github: "https://github.com",
+      ChatGPT: "https://chat.openai.com"
     },
   },
   {
@@ -29,18 +30,18 @@ export default [
     category: "Proton",
     color: "purple",
     items: {
-      Drive: "drive.proton.me",
-      Calendar: "calendar.proton.me",
-      Mail: "mail.proton.me",
-      Pass: "pass.proton.me",
+      Drive: "https://drive.proton.me",
+      Calendar: "https://calendar.proton.me",
+      Mail: "https://mail.proton.me",
+      Pass: "https://pass.proton.me",
     },
   },
   {
     category: "Entertainment",
     color: "red",
     items: {
-      Netflix: "netflix.com",
-      Youtube: "youtube.com",
+      Netflix: "https://netflix.com",
+      Youtube: "https://youtube.com",
     },
   },
 
