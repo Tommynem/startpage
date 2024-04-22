@@ -4,7 +4,7 @@ export default [
     color: "cyan",
     items: {
       Github: "https://github.com",
-      ChatGPT: "https://chat.openai.com"
+      ChatGPT: "https://chat.openai.com",
     },
   },
   {
