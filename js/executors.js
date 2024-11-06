@@ -1,4 +1,10 @@
-import { dateDiffInMinutes, error, getWeather, render, isValidURL } from "./helpers.js";
+import {
+  dateDiffInMinutes,
+  error,
+  getWeather,
+  render,
+  isValidURL,
+} from "./helpers.js";
 import shortcuts from "./shortcuts.js";
 
 export default {
@@ -69,7 +75,7 @@ export default {
     if (isValidURL(urlInput)) {
       let url = urlInput;
       if (!/^https?:\/\//i.test(url)) {
-        url = 'http://' + url;
+        url = "http://" + url;
       }
       render(`Opening URL: ${url}`);
       window.location.href = url;

@@ -81,7 +81,7 @@ export function isValidURL(string) {
   try {
     // Prepend 'http://' if the protocol is missing
     if (!/^https?:\/\//i.test(string)) {
-      string = 'http://' + string;
+      string = "http://" + string;
     }
     new URL(string);
     return true;
