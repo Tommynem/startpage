@@ -1,4 +1,4 @@
-import { dateDiffInMinutes, error, getWeather, render } from "./helpers.js";
+import { dateDiffInMinutes, error, getWeather, render, isValidURL } from "./helpers.js";
 import shortcuts from "./shortcuts.js";
 
 export default {
@@ -58,6 +58,23 @@ export default {
     } else {
       render("No query, redirecting to DDG!");
       window.location.href = "https://duckduckgo.com";
+    }
+  },
+  url: (options) => {
+    const urlInput = options.join(" ");
+    if (!urlInput) {
+      render("No URL provided");
+      return;
+    }
+    if (isValidURL(urlInput)) {
+      let url = urlInput;
+      if (!/^https?:\/\//i.test(url)) {
+        url = 'http://' + url;
+      }
+      render(`Opening URL: ${url}`);
+      window.location.href = url;
+    } else {
+      error("yellow", "Invalid URL", urlInput);
     }
   },
   ls: () => {

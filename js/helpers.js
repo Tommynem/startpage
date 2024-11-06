@@ -77,4 +77,17 @@ const getWeather = () => {
 
 const getDate = () => {};
 
+export function isValidURL(string) {
+  try {
+    // Prepend 'http://' if the protocol is missing
+    if (!/^https?:\/\//i.test(string)) {
+      string = 'http://' + string;
+    }
+    new URL(string);
+    return true;
+  } catch (_) {
+    return false;
+  }
+}
+
 export { render, error, getWeather, getDate, dateDiffInMinutes };

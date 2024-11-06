@@ -31,4 +31,9 @@ export default [
     description: "Displays a random famous quote",
     execute: executor.motd,
   },
+  {
+    name: ["url", "u"],
+    description: "Opens the specified URL",
+    execute: executor.url,
+  },
 ];
