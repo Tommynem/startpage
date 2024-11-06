@@ -59,6 +59,6 @@ window.addEventListener("load", () => {
     root.style.backgroundSize = "cover";
     root.style.backgroundPosition = "center";
   } catch (e) {
-    error("red", "JS Error", e.message)
+    error("red", "JS Error", e.message);
   }
 });
