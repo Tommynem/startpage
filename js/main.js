@@ -44,20 +44,21 @@ input.addEventListener("keydown", function (e) {
             render(`Opening URL: ${url}`);
             window.location.href = url;
           } else {
-          // If input is a valid URL, open it
-          let url = fullInput;
-          if (!/^https?:\/\//i.test(url)) {
-            url = 'http://' + url;
+            // If input is a valid URL, open it
+            let url = fullInput;
+            if (!/^https?:\/\//i.test(url)) {
+              url = "http://" + url;
+            }
+            if (isValidURL(url)) {
+              render(`Opening URL: ${url}`);
+              window.location.href = url;
+            } else {
+              // Otherwise, perform a search
+              render(`Searching for: ${fullInput}`);
+              executors.search([fullInput]);
+            }
           }
-          if (isValidURL(url)) {
-            render(`Opening URL: ${url}`);
-            window.location.href = url;
-          } else {
-            // Otherwise, perform a search
-            render(`Searching for: ${fullInput}`);
-            executors.search([fullInput]);
-          }
-        }        }
+        }
       }
     } catch (e) {
       console.error(e);
