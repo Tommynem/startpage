@@ -1,13 +1,20 @@
+// main.js
 import commands from "./commands.js";
 import executors from "./executors.js";
-import { error, render, isURLValid } from "./helpers.js";
+import { error, render, isValidURL } from "./helpers.js";
 import shortcuts from "./shortcuts.js";
 
 const input = document.getElementById("input");
 const output = document.getElementById("output");
 
+// Check if input and output elements are found
+if (!input || !output) {
+  console.error("Input or output element not found");
+}
+
 input.addEventListener("keydown", function (e) {
   if (e.key === "Enter") {
+    console.log("Enter key pressed");
     const fullInput = input.value.trim();
     const userInput = fullInput.split(" ");
     const command = userInput[0].toLowerCase();
@@ -18,12 +25,14 @@ input.addEventListener("keydown", function (e) {
         c.name.map((n) => n.toLowerCase()).includes(command),
       );
       if (commandDetails) {
+        console.log(`Executing command: ${command}`);
         commandDetails.execute(options);
       } else {
         const shortcutDetails = shortcuts
           .flatMap((c) => Object.entries(c.items))
           .find(([i]) => i.toLowerCase().startsWith(command));
         if (shortcutDetails) {
+          console.log(`Found shortcut: ${shortcutDetails[0]}`);
           render(`Redirecting to ${shortcutDetails[0]}...`);
           window.location.href = shortcutDetails[1];
         } else {
@@ -35,12 +44,14 @@ input.addEventListener("keydown", function (e) {
             render(`Opening URL: ${url}`);
             window.location.href = url;
           } else {
+            console.log(`Searching for: ${fullInput}`);
             render(`Searching for: ${fullInput}`);
             executors.search([fullInput]);
           }
         }
       }
     } catch (e) {
+      console.error(e);
       error("red", "JS Error", e.message);
     }
     input.value = "";
@@ -49,6 +60,7 @@ input.addEventListener("keydown", function (e) {
 
 window.addEventListener("load", () => {
   try {
+    console.log("Page loaded, executing ls and motd");
     executors.ls();
     executors.motd();
     let filenames = ["purple-mountains.jpg"];
@@ -59,6 +71,7 @@ window.addEventListener("load", () => {
     root.style.backgroundSize = "cover";
     root.style.backgroundPosition = "center";
   } catch (e) {
+    console.error(e);
     error("red", "JS Error", e.message);
   }
 });
