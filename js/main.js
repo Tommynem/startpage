@@ -72,7 +72,7 @@ window.addEventListener("load", () => {
   try {
     console.log("Page loaded, executing ls and motd");
     executors.ls();
-    executors.motd();
+    // executors.motd();
     let filenames = ["purple-mountains.jpg"];
     let root = document.getElementsByTagName("html")[0];
     root.style.backgroundImage = `url("./backgrounds/${
