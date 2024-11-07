@@ -43,7 +43,7 @@ input.addEventListener("keydown", function (e) {
           // If input is a valid URL, open it
           let url = fullInput;
           if (!/^https?:\/\//i.test(url)) {
-            url = 'http://' + url;
+            url = "http://" + url;
           }
           if (isValidURL(url)) {
             render(`Opening URL: ${url}`);
