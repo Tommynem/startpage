@@ -79,13 +79,14 @@ const getDate = () => {};
 
 export function isValidURL(string) {
   const pattern = new RegExp(
-    '^(https?:\\/\\/)?' +                // Protocol
-    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // Domain name
-    '((\\d{1,3}\\.){3}\\d{1,3}))' +      // OR IP (v4) address
-    '(\\:\\d+)?' +                       // Port
-    '(\\/[-a-z\\d%_.~+]*)*' +            // Path
-    '(\\?[;&a-z\\d%_.~+=-]*)?' +         // Query string
-    '(\\#[-a-z\\d_]*)?$','i'             // Fragment locator
+    "^(https?:\\/\\/)?" + // Protocol
+      "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // Domain name
+      "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR IP (v4) address
+      "(\\:\\d+)?" + // Port
+      "(\\/[-a-z\\d%_.~+]*)*" + // Path
+      "(\\?[;&a-z\\d%_.~+=-]*)?" + // Query string
+      "(\\#[-a-z\\d_]*)?$",
+    "i", // Fragment locator
   );
   return !!pattern.test(string);
 }
