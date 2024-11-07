@@ -7,15 +7,20 @@ import shortcuts from "./shortcuts.js";
 const input = document.getElementById("input");
 const output = document.getElementById("output");
 
-// Check if input and output elements are found
-if (!input || !output) {
-  console.error("Input or output element not found");
-}
+// Command history array and index
+let commandHistory = [];
+let historyIndex = -1; // Start at -1 to indicate no history navigation yet
 
 input.addEventListener("keydown", function (e) {
   if (e.key === "Enter") {
-    console.log("Enter key pressed");
     const fullInput = input.value.trim();
+
+    // Add the command to the history
+    if (fullInput) {
+      commandHistory.push(fullInput);
+      historyIndex = commandHistory.length; // Reset history index
+    }
+
     const userInput = fullInput.split(" ");
     const command = userInput[0].toLowerCase();
     const options = userInput.slice(1);
@@ -25,38 +30,28 @@ input.addEventListener("keydown", function (e) {
         c.name.map((n) => n.toLowerCase()).includes(command),
       );
       if (commandDetails) {
-        console.log(`Executing command: ${command}`);
         commandDetails.execute(options);
       } else {
+        // Check if input matches any shortcut
         const shortcutDetails = shortcuts
           .flatMap((c) => Object.entries(c.items))
-          .find(([i]) => i.toLowerCase().startsWith(command));
+          .find(([name]) => name.toLowerCase().startsWith(command));
         if (shortcutDetails) {
-          console.log(`Found shortcut: ${shortcutDetails[0]}`);
           render(`Redirecting to ${shortcutDetails[0]}...`);
           window.location.href = shortcutDetails[1];
         } else {
-          if (isValidURL(fullInput)) {
-            let url = fullInput;
-            if (!/^https?:\/\//i.test(url)) {
-              url = "http://" + url;
-            }
+          // If input is a valid URL, open it
+          let url = fullInput;
+          if (!/^https?:\/\//i.test(url)) {
+            url = 'http://' + url;
+          }
+          if (isValidURL(url)) {
             render(`Opening URL: ${url}`);
             window.location.href = url;
           } else {
-            // If input is a valid URL, open it
-            let url = fullInput;
-            if (!/^https?:\/\//i.test(url)) {
-              url = "http://" + url;
-            }
-            if (isValidURL(url)) {
-              render(`Opening URL: ${url}`);
-              window.location.href = url;
-            } else {
-              // Otherwise, perform a search
-              render(`Searching for: ${fullInput}`);
-              executors.search([fullInput]);
-            }
+            // Otherwise, perform a search
+            render(`Searching for: ${fullInput}`);
+            executors.search([fullInput]);
           }
         }
       }
@@ -65,6 +60,27 @@ input.addEventListener("keydown", function (e) {
       error("red", "JS Error", e.message);
     }
     input.value = "";
+  } else if (e.key === "ArrowUp") {
+    // Navigate to previous command
+    if (commandHistory.length > 0 && historyIndex > 0) {
+      historyIndex--;
+      input.value = commandHistory[historyIndex];
+    } else if (historyIndex === 0) {
+      // Already at the oldest command
+      input.value = commandHistory[historyIndex];
+    }
+    e.preventDefault(); // Prevent default action of moving cursor to beginning
+  } else if (e.key === "ArrowDown") {
+    // Navigate to next command
+    if (commandHistory.length > 0 && historyIndex < commandHistory.length - 1) {
+      historyIndex++;
+      input.value = commandHistory[historyIndex];
+    } else if (historyIndex >= commandHistory.length - 1) {
+      // At the latest command, clear input
+      historyIndex = commandHistory.length;
+      input.value = "";
+    }
+    e.preventDefault(); // Prevent default action of moving cursor to end
   }
 });
 
