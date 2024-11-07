@@ -78,16 +78,16 @@ const getWeather = () => {
 const getDate = () => {};
 
 export function isValidURL(string) {
-  try {
-    // Prepend 'http://' if the protocol is missing
-    if (!/^https?:\/\//i.test(string)) {
-      string = "http://" + string;
-    }
-    new URL(string);
-    return true;
-  } catch (_) {
-    return false;
-  }
+  const pattern = new RegExp(
+    '^(https?:\\/\\/)?' +                // Protocol
+    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // Domain name
+    '((\\d{1,3}\\.){3}\\d{1,3}))' +      // OR IP (v4) address
+    '(\\:\\d+)?' +                       // Port
+    '(\\/[-a-z\\d%_.~+]*)*' +            // Path
+    '(\\?[;&a-z\\d%_.~+=-]*)?' +         // Query string
+    '(\\#[-a-z\\d_]*)?$','i'             // Fragment locator
+  );
+  return !!pattern.test(string);
 }
 
 export { render, error, getWeather, getDate, dateDiffInMinutes };
