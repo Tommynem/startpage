@@ -8,7 +8,7 @@ export default [
     },
   },
   {
-    category: "~/Dev/Github/",
+    category: "Dev/Github/",
     color: "blue",
     items: {
       vuwebsite: "https://github.com/Tommynem/vuwebsite",
