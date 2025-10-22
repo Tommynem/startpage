@@ -86,12 +86,12 @@ input.addEventListener("keydown", function (e) {
 
 window.addEventListener("load", () => {
   try {
-    console.log("Page loaded, executing ls and motd");
+    console.log("Page loaded, executing ls");
     executors.ls();
     // executors.motd();
     let filenames = ["purple-mountains.jpg"];
     let root = document.getElementsByTagName("html")[0];
-    root.style.backgroundImage = `url("./backgrounds/${
+    root.style.backgroundImage = `url("backgrounds/${
       filenames[Math.floor(Math.random() * filenames.length)]
     }")`;
     root.style.backgroundSize = "cover";
