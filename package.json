@@ -1,0 +1,27 @@
+{
+  "name": "startpage",
+  "version": "1.0.0",
+  "description": "An iTerm-inspired startpage page for faster web browsing. Because everything's better on the command line!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier --write \"**/*.{js,css,html,json,md}\"",
+    "prepare": "husky"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tommynem/startpage.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Tommynem/startpage/issues"
+  },
+  "homepage": "https://github.com/Tommynem/startpage#readme",
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "prettier": "^3.6.2"
+  }
+}
